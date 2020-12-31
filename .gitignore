@@ -3,3 +3,11 @@
 ################################################################################
 
 *.lock
+*.ide
+*.ide-shm
+*.ide-wal
+*.suo
+/UnitTestReporter/UnitTestReporter/obj
+/UnitTestReporter/UnitTestReporter/UnitTestReporter.csproj.user
+/.vs
+/UnitTestReporter/UnitTestReporter/bin/Debug/netcoreapp3.1

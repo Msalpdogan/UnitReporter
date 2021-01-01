@@ -27,6 +27,7 @@ namespace UnitTestReporter
                .ConfigureServices((hostContext, services) =>
                {
                    services.AddScoped<Form1>();
+                   services.AddSingleton<>();
 
                    //Add Serilog
                    var serilogLogger = new LoggerConfiguration()

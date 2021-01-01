@@ -10,15 +10,15 @@ namespace UnitTestReporter
     {
         private readonly ILogger logger;
         private readonly ICmdCaller cmdCaller;
-        private readonly AppSettings options;
+        private readonly CommonSettings options;
 
-        public Form1(ILogger<Form1> _logger, ICmdCaller _cmdCaller, IOptions<AppSettings> _options)
+        public Form1(ILogger<Form1> _logger, ICmdCaller _cmdCaller, IOptions<CommonSettings> _options)
         {
             logger = _logger;
             cmdCaller = _cmdCaller;
             options = _options.Value;
             InitializeComponent();
-            var a = options.TempDirectory;
+            var a = options.MinLogLevel;
         }
 
     }

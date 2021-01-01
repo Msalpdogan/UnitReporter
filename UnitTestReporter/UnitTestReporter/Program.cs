@@ -43,20 +43,21 @@ namespace UnitTestReporter
                        services.AddSingleton<ICmdCaller, CmdCaller>();
 
                        //Add Serilog
+                       LogLevel minLogLevel = (LogLevel)Int32.Parse(configuration.GetSection("Common").GetSection("MinLogLevel").Value);
                        var serilogLogger = new LoggerConfiguration()
                                    .WriteTo.File(".\\Logs\\Reporter.log", rollingInterval: RollingInterval.Hour)
                                    .CreateLogger();
                        services.AddLogging(x =>
                        {
-                           x.SetMinimumLevel(LogLevel.Trace);
+                           x.SetMinimumLevel(minLogLevel);
                            x.AddSerilog(logger: serilogLogger, dispose: true);
                        });
 
                        //Add Config
-                       services.Configure<AppSettings>(configuration.GetSection("App"));
+                       services.Configure<CommonSettings>(configuration.GetSection("Common"));
 
                    });
-
+            
 
             var host = builder.Build();
 
@@ -66,13 +67,14 @@ namespace UnitTestReporter
                 try
                 {
                     var form1 = services.GetRequiredService<Form1>();
-                    Application.Run(form1);
 
+                    Application.Run(form1);
+                    
                     Console.WriteLine("Success");
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("Error Occured");
+                    Console.WriteLine("Error Occured" + ex.Message);
                 }
             }
         }

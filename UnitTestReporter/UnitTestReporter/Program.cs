@@ -37,15 +37,17 @@ namespace UnitTestReporter
             var builder = new HostBuilder()
                    .ConfigureServices((hostContext, services) =>
                    {
-                       services.AddScoped<Form1>();
+                       services.AddScoped<BaseForm>();
                        services.AddOptions();
 
                        services.AddSingleton<ICmdCaller, CmdCaller>();
 
                        //Add Serilog
                        LogLevel minLogLevel = (LogLevel)Int32.Parse(configuration.GetSection("Common").GetSection("MinLogLevel").Value);
+                       string template = configuration.GetSection("Common").GetSection("OutputTemplate").Value;
+
                        var serilogLogger = new LoggerConfiguration()
-                                   .WriteTo.File(".\\Logs\\Reporter.log", rollingInterval: RollingInterval.Hour)
+                                   .WriteTo.File(".\\Logs\\Reporter.log", rollingInterval: RollingInterval.Hour, outputTemplate: template)
                                    .CreateLogger();
                        services.AddLogging(x =>
                        {
@@ -66,7 +68,7 @@ namespace UnitTestReporter
                 var services = serviceScope.ServiceProvider;
                 try
                 {
-                    var form1 = services.GetRequiredService<Form1>();
+                    var form1 = services.GetRequiredService<BaseForm>();
 
                     Application.Run(form1);
                     

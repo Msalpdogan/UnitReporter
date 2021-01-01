@@ -21,22 +21,18 @@ namespace UnitTestReporter.Business.Classes
         {
             try
             {
-                var process = new Process
+                var info = new ProcessStartInfo(exe);
+                info.Arguments = args;
+                info.RedirectStandardOutput = true;
+                info.WindowStyle = ProcessWindowStyle.Hidden;
+
+                var output = "";
+                using (var process = Process.Start(info))
                 {
-                    StartInfo = new ProcessStartInfo
-                    {
-                        FileName = exe,
-                        Arguments = args,
-                        UseShellExecute = true,
-                        RedirectStandardOutput = false,
-                        RedirectStandardError = false,
-                        CreateNoWindow = true
-                    }
+                    output = process.StandardOutput.ReadToEnd();
+                }
+                return output.Trim();
 
-                };
-
-                process.Start();
-                return "";
             }
             catch (System.Exception ex)
             {

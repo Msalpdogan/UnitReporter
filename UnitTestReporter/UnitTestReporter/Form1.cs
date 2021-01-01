@@ -8,15 +8,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using UnitTestReporter.Business.Interfaces;
 
 namespace UnitTestReporter
 {
     public partial class Form1 : Form
     {
         private readonly ILogger logger;
-        public Form1(ILogger<Form1> _logger)
+        private readonly ICmdCaller cmdCaller;
+        public Form1(ILogger<Form1> _logger, ICmdCaller _cmdCaller)
         {
             logger = _logger;
+            cmdCaller = _cmdCaller;
             InitializeComponent();
         }
 

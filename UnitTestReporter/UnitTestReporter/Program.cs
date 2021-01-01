@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using UnitTestReporter.Business.Classes;
+using UnitTestReporter.Business.Interfaces;
 
 namespace UnitTestReporter
 {
@@ -27,7 +29,7 @@ namespace UnitTestReporter
                .ConfigureServices((hostContext, services) =>
                {
                    services.AddScoped<Form1>();
-                   services.AddSingleton<>();
+                   services.AddSingleton<ICmdCaller, CmdCaller>();
 
                    //Add Serilog
                    var serilogLogger = new LoggerConfiguration()

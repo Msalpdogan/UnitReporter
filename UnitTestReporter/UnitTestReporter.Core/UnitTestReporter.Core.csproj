@@ -10,6 +10,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Files\featuresettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Files\appsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

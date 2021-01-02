@@ -32,6 +32,11 @@ namespace UnitTestReporter
                 .AddJsonFile(".\\Files\\appsettings.json", optional: false)
                 .AddEnvironmentVariables()
                 .Build();
+            var featureConfiguration = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile(".\\Files\\featuresettings.json", optional: false)
+                .AddEnvironmentVariables()
+                .Build();
 
 
             ///Generate Host Builder and Register the Services for DI
@@ -62,7 +67,7 @@ namespace UnitTestReporter
                        //Add Config
                        services.Configure<CommonSettings>(configuration.GetSection("Common"));
                        services.Configure<ParserSettings>(configuration.GetSection("Parser"));
-
+                       services.Configure<FeatureReportSettings>(featureConfiguration.GetSection("FeatureReporter"));
 
                    });
             

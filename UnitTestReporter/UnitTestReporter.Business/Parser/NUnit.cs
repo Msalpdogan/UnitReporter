@@ -12,7 +12,7 @@ using UnitTestReporter.Core.Utils;
 
 namespace UnitTestReporter.Business.Parser
 {
-    internal class NUnit : IParser
+    public class NUnit : IParser<NUnit>
     {
         private string _resultsFile;
 

@@ -10,6 +10,7 @@ using UnitTestReporter.Business.Interfaces;
 using UnitTestReporter.Core.Configuration;
 using Microsoft.Extensions.Configuration;
 using System.IO;
+using UnitTestReporter.Business.Parser;
 
 namespace UnitTestReporter
 {
@@ -41,6 +42,9 @@ namespace UnitTestReporter
                        services.AddOptions();
 
                        services.AddSingleton<ICmdCaller, CmdCaller>();
+                       services.AddSingleton<IParser<NUnit>, NUnit>();
+                       services.AddSingleton<IParser<JUnit>, JUnit>();
+
 
                        //Add Serilog
                        LogLevel minLogLevel = (LogLevel)Int32.Parse(configuration.GetSection("Common").GetSection("MinLogLevel").Value);

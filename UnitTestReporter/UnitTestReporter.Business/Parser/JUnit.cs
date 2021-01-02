@@ -11,7 +11,7 @@ using UnitTestReporter.Core.Utils;
 
 namespace UnitTestReporter.Business.Parser
 {
-    internal class JUnit : IParser
+    public class JUnit : IParser<JUnit>
     {
         public Report Parse(string filePath)
         {

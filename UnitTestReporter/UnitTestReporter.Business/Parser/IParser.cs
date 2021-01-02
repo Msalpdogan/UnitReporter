@@ -5,7 +5,7 @@ using UnitTestReporter.Core.Models;
 
 namespace UnitTestReporter.Business.Parser
 {
-    public interface IParser
+    public interface IParser<T> where T : class
     {
         Report Parse(string filePath);
     }

@@ -11,3 +11,9 @@
 /UnitTestReporter/UnitTestReporter/UnitTestReporter.csproj.user
 /.vs
 /UnitTestReporter/UnitTestReporter/bin/Debug/netcoreapp3.1
+/UnitTestReporter/.vs/UnitTestReporter/DesignTimeBuild/.dtbcache
+/UnitTestReporter/UnitTestReporter.Business/obj
+/UnitTestReporter/UnitTestReporter.Business/bin/Debug/netcoreapp3.1
+/UnitTestReporter/UnitTestReporter.Core/bin/Debug/netcoreapp3.1
+/UnitTestReporter/UnitTestReporter.Core/obj/Debug/netcoreapp3.1
+/UnitTestReporter/UnitTestReporter.Core/obj

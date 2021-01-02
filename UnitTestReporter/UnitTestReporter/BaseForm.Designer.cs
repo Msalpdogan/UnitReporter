@@ -1,6 +1,6 @@
 ﻿namespace UnitTestReporter
 {
-    partial class Form1
+    partial class BaseForm
     {
         /// <summary>
         ///  Required designer variable.

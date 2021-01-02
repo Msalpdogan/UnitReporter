@@ -17,3 +17,4 @@
 /UnitTestReporter/UnitTestReporter.Core/bin/Debug/netcoreapp3.1
 /UnitTestReporter/UnitTestReporter.Core/obj/Debug/netcoreapp3.1
 /UnitTestReporter/UnitTestReporter.Core/obj
+*.user

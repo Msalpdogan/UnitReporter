@@ -61,6 +61,8 @@ namespace UnitTestReporter
 
                        //Add Config
                        services.Configure<CommonSettings>(configuration.GetSection("Common"));
+                       services.Configure<ParserSettings>(configuration.GetSection("Parser"));
+
 
                    });
             

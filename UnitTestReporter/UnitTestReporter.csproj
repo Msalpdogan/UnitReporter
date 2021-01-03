@@ -18,4 +18,10 @@
     <ProjectReference Include="..\UnitTestReporter.Core\UnitTestReporter.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="BaseForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+  </ItemGroup>
+
 </Project>

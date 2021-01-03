@@ -26,7 +26,7 @@ namespace UnitTestReporter
             parser = _parser;
             reporter = _reporter;
 
-            var report =  parser.Parse(".\\TestFiles\\TestResult.xml");
+            var report =  parser.Parse(".\\Files\\TestResult.xml");
             reporter.CreateReport(report);
 
             InitializeComponent();

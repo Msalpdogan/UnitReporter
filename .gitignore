@@ -1,4 +1,4 @@
-﻿################################################################################
+################################################################################
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
@@ -8,7 +8,6 @@
 *.ide-wal
 *.suo
 /UnitTestReporter/UnitTestReporter/obj
-/UnitTestReporter/UnitTestReporter/UnitTestReporter.csproj.user
 /.vs
 /UnitTestReporter/UnitTestReporter/bin/Debug/netcoreapp3.1
 /UnitTestReporter/.vs/UnitTestReporter/DesignTimeBuild/.dtbcache

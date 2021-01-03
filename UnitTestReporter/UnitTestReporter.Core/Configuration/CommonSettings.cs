@@ -16,7 +16,7 @@ namespace UnitTestReporter.Core.Configuration
         public int MinLogLevel { get; set; } = 0;
         public int StatisticSenderFlag { get; set; } = 0; //not use yet.
         public string OutputTemplate { get; set; } = "[{Timestamp:HH:mm:ss} {Level:u3}] {Message:lj}{NewLine}{Exception}";
-
+        public string DocxTemplate { get; set; } = ".\\Files\\template.docx";
 
     }
 }

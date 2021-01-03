@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Xml.Linq;
 using UnitTestReporter.Core.Extensions;
 using UnitTestReporter.Core.Models;
@@ -37,7 +38,7 @@ namespace UnitTestReporter.Business.Parser
             var report = new Report
             {
                 FileName = Path.GetFileNameWithoutExtension(resultsFile),
-                AssemblyName = doc.Root.Attribute("name") != null ? doc.Root.Attribute("name").Value : null,
+                AssemblyName = doc.Root.Element("test-suite").Attribute("fullname").Value != null ? doc.Root.Element("test-suite").Attribute("fullname").Value : null,
                 TestRunner = TestRunner.NUnit
             };
 
@@ -239,6 +240,7 @@ namespace UnitTestReporter.Business.Parser
 
             //Sort category list so it's in alphabetical order
             report.CategoryList.Sort();
+            _logger.LogInformation(JsonSerializer.Serialize(report));
 
             return report;
         }

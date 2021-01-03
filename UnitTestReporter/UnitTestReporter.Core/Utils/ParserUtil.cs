@@ -18,23 +18,14 @@ namespace UnitTestReporter.Core.Utils
 
         private readonly ParserSettings _parserSettings;
 
-        private readonly string _filePath;
-
-        private bool _validJunitSchema;
-
         public ParserUtil(ILogger<ParserUtil> logger, IOptions<ParserSettings> parserOptions)
         {
             _logger = logger;
             _parserSettings = parserOptions.Value;
         }
 
-        public ParserUtil(string filePath) : base()
-        {
-            _filePath = filePath;
-            _validJunitSchema = true;
-        }
 
-        public TestRunner GetTestRunnerType()
+        public TestRunner GetTestRunnerType(string _filePath)
         {
             var doc = new XmlDocument();
 
@@ -99,7 +90,7 @@ namespace UnitTestReporter.Core.Utils
                         }
                     }
 
-                    if (ValidateJUnitXsd(doc))
+                    if (ValidateJUnitXsd(doc, _filePath))
                     {
                         return TestRunner.JUnit;
                     }
@@ -124,7 +115,7 @@ namespace UnitTestReporter.Core.Utils
             return TestRunner.Unknown;
         }
 
-        private bool ValidateJUnitXsd(XmlDocument doc)
+        private bool ValidateJUnitXsd(XmlDocument doc, string _filePath, bool _validJunitSchema = true)
         {
             try
             {

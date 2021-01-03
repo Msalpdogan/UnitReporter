@@ -11,6 +11,7 @@ using UnitTestReporter.Core.Configuration;
 using Microsoft.Extensions.Configuration;
 using System.IO;
 using UnitTestReporter.Business.Parser;
+using UnitTestReporter.Business.Reporter;
 
 namespace UnitTestReporter
 {
@@ -32,6 +33,11 @@ namespace UnitTestReporter
                 .AddJsonFile(".\\Files\\appsettings.json", optional: false)
                 .AddEnvironmentVariables()
                 .Build();
+            var featureConfiguration = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile(".\\Files\\featuresettings.json", optional: false)
+                .AddEnvironmentVariables()
+                .Build();
 
 
             ///Generate Host Builder and Register the Services for DI
@@ -44,6 +50,8 @@ namespace UnitTestReporter
                        services.AddSingleton<ICmdCaller, CmdCaller>();
                        services.AddSingleton<IParser<NUnit>, NUnit>();
                        services.AddSingleton<IParser<JUnit>, JUnit>();
+                       services.AddSingleton<IReporter<ReporterDocx>, ReporterDocx>();
+
 
 
                        //Add Serilog
@@ -62,7 +70,7 @@ namespace UnitTestReporter
                        //Add Config
                        services.Configure<CommonSettings>(configuration.GetSection("Common"));
                        services.Configure<ParserSettings>(configuration.GetSection("Parser"));
-
+                       services.Configure<FeatureReportSettings>(featureConfiguration.GetSection("FeatureReporter"));
 
                    });
             

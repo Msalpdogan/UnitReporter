@@ -17,11 +17,11 @@ namespace UnitTestReporter.Business.Parser
     {
         private string _resultsFile;
 
-        private ILogger _logger;
+        private ILogger logger;
 
-        public NUnit(ILogger<NUnit> logger)
+        public NUnit(ILogger<NUnit> _logger)
         {
-            _logger = logger;
+            logger = _logger;
         }
 
         public Report Parse(string resultsFile)
@@ -32,6 +32,7 @@ namespace UnitTestReporter.Business.Parser
 
             if (doc.Root == null)
             {
+                logger.LogError($"NUnit Parser document is null. ");
                 throw new NullReferenceException();
             }
 
@@ -240,7 +241,7 @@ namespace UnitTestReporter.Business.Parser
 
             //Sort category list so it's in alphabetical order
             report.CategoryList.Sort();
-            _logger.LogInformation(JsonSerializer.Serialize(report));
+            logger.LogInformation(JsonSerializer.Serialize(report));
 
             return report;
         }
@@ -253,23 +254,32 @@ namespace UnitTestReporter.Business.Parser
         /// <returns></returns>
         private HashSet<string> GetCategories(XElement elem, bool allDescendents)
         {
-            //Define which function to use
-            var parser = allDescendents
-                ? new Func<XElement, string, IEnumerable<XElement>>((e, s) => e.Descendants(s))
-                : new Func<XElement, string, IEnumerable<XElement>>((e, s) => e.Elements(s));
-
-            //Grab unique categories
             var categories = new HashSet<string>();
-            var hasCategories = parser(elem, "categories").Any();
-            if (hasCategories)
+            try
             {
-                var cats = parser(elem, "categories").Elements("category").ToList();
+                //Define which function to use
+                var parser = allDescendents
+                    ? new Func<XElement, string, IEnumerable<XElement>>((e, s) => e.Descendants(s))
+                    : new Func<XElement, string, IEnumerable<XElement>>((e, s) => e.Elements(s));
 
-                cats.ForEach(x =>
+                //Grab unique categories
+                var hasCategories = parser(elem, "categories").Any();
+                if (hasCategories)
                 {
-                    var cat = x.Attribute("name").Value;
-                    categories.Add(cat);
-                });
+                    var cats = parser(elem, "categories").Elements("category").ToList();
+
+                    cats.ForEach(x =>
+                    {
+                        var cat = x.Attribute("name").Value;
+                        categories.Add(cat);
+                    });
+                }
+
+                logger.LogInformation($"NUnit GetCategories is success. Categories: {categories}");
+            }
+            catch (Exception ex)
+            {
+                logger.LogError($"NUnit GetCategories is failed. Ex: {ex}");
             }
 
             return categories;
@@ -277,26 +287,33 @@ namespace UnitTestReporter.Business.Parser
 
         private RunInfo CreateRunInfo(XDocument doc, Report report)
         {
-            if (doc.Element("environment") == null)
-                return null;
-
             var runInfo = new RunInfo();
-            runInfo.TestRunner = report.TestRunner;
+            try
+            {
+                if (doc.Element("environment") == null)
+                    return null;
 
-            var env = doc.Descendants("environment").First();
-            runInfo.Info.Add("Test Results File", _resultsFile);
-            if (env.Attribute("nunit-version") != null)
-                runInfo.Info.Add("NUnit Version", env.Attribute("nunit-version").Value);
-            runInfo.Info.Add("Assembly Name", report.AssemblyName);
-            runInfo.Info.Add("OS Version", env.Attribute("os-version").Value);
-            runInfo.Info.Add("Platform", env.Attribute("platform").Value);
-            runInfo.Info.Add("CLR Version", env.Attribute("clr-version").Value);
-            runInfo.Info.Add("Machine Name", env.Attribute("machine-name").Value);
-            runInfo.Info.Add("User", env.Attribute("user").Value);
-            runInfo.Info.Add("User Domain", env.Attribute("user-domain").Value);
+                runInfo.TestRunner = report.TestRunner;
 
+                var env = doc.Descendants("environment").First();
+                runInfo.Info.Add("Test Results File", _resultsFile);
+                if (env.Attribute("nunit-version") != null)
+                    runInfo.Info.Add("NUnit Version", env.Attribute("nunit-version").Value);
+                runInfo.Info.Add("Assembly Name", report.AssemblyName);
+                runInfo.Info.Add("OS Version", env.Attribute("os-version").Value);
+                runInfo.Info.Add("Platform", env.Attribute("platform").Value);
+                runInfo.Info.Add("CLR Version", env.Attribute("clr-version").Value);
+                runInfo.Info.Add("Machine Name", env.Attribute("machine-name").Value);
+                runInfo.Info.Add("User", env.Attribute("user").Value);
+                runInfo.Info.Add("User Domain", env.Attribute("user-domain").Value);
+                
+                logger.LogInformation($"NUnit CreateRunInfo is success. RunInfo: {runInfo}");
+            }
+            catch (Exception ex)
+            {
+                logger.LogError($"NUnit CreateRunInfo is failed. Ex: {ex}");
+            }
             return runInfo;
         }
-
     }
 }

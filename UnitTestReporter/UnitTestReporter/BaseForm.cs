@@ -4,6 +4,8 @@ using System;
 using System.Text;
 using System.Windows.Forms;
 using UnitTestReporter.Business.Interfaces;
+using UnitTestReporter.Business.Parser;
+using UnitTestReporter.Business.Reporter;
 using UnitTestReporter.Core.Configuration;
 
 namespace UnitTestReporter
@@ -13,12 +15,20 @@ namespace UnitTestReporter
         private readonly ILogger logger;
         private readonly ICmdCaller cmdCaller;
         private readonly CommonSettings options;
+        private readonly IParser<NUnit> parser;
+        private readonly IReporter<ReporterDocx> reporter;
 
-        public BaseForm(ILogger<BaseForm> _logger, ICmdCaller _cmdCaller, IOptions<CommonSettings> _options)
+        public BaseForm(ILogger<BaseForm> _logger, ICmdCaller _cmdCaller, IOptions<CommonSettings> _options, IParser<NUnit> _parser, IReporter<ReporterDocx> _reporter)
         {
             logger = _logger;
             cmdCaller = _cmdCaller;
             options = _options.Value;
+            parser = _parser;
+            reporter = _reporter;
+
+            var report =  parser.Parse(".\\TestFiles\\TestResult.xml");
+            reporter.CreateReport(report);
+
             InitializeComponent();
             writeSystemStatus();
             writeConfiguration();

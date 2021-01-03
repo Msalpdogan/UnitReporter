@@ -7,7 +7,7 @@ namespace UnitTestReporter.Business.Reporter
 {
     public class ReporterPdf : IReporter<ReporterPdf>
     {
-        public void CreateReport(Report report, string outputPath)
+        public void CreateReport(Report report)
         {
             throw new NotImplementedException();
         }

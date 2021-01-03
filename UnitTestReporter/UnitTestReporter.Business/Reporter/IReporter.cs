@@ -7,6 +7,6 @@ namespace UnitTestReporter.Business.Reporter
 {
     public interface IReporter<T> where T: class
     {
-        void CreateReport(Report report, string outputPath);
+        void CreateReport(Report report);
     }
 }

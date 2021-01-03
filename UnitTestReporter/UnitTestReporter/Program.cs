@@ -11,6 +11,7 @@ using UnitTestReporter.Core.Configuration;
 using Microsoft.Extensions.Configuration;
 using System.IO;
 using UnitTestReporter.Business.Parser;
+using UnitTestReporter.Business.Reporter;
 
 namespace UnitTestReporter
 {
@@ -49,6 +50,8 @@ namespace UnitTestReporter
                        services.AddSingleton<ICmdCaller, CmdCaller>();
                        services.AddSingleton<IParser<NUnit>, NUnit>();
                        services.AddSingleton<IParser<JUnit>, JUnit>();
+                       services.AddSingleton<IReporter<ReporterDocx>, ReporterDocx>();
+
 
 
                        //Add Serilog

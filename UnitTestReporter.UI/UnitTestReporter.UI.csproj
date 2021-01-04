@@ -19,13 +19,9 @@
   </ItemGroup>
 
   <ItemGroup>
-<<<<<<< HEAD:UnitTestReporter.UI/UnitTestReporter.UI.csproj
-    <Compile Update="BaseForm.cs" />
-=======
     <Compile Update="BaseForm.cs">
       <SubType>Form</SubType>
     </Compile>
->>>>>>> 61a1018 (Updated Git Folder Path):UnitTestReporter/UnitTestReporter.csproj
   </ItemGroup>
 
 </Project>

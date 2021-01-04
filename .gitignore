@@ -28,3 +28,13 @@
 /UnitTestReporter.Test/obj
 /UnitTestReporter/bin/Debug/netcoreapp3.1
 /UnitTestReporter/obj
+<<<<<<< HEAD
+/UnitTestReporter/bin/Debug/net5.0-windows
+/UnitTestReporter.Business/bin/Debug/net5.0
+/UnitTestReporter.Core/bin/Debug/net5.0
+/UnitTestReporter.Test/bin/Debug/net5.0
+/UnitTestReporter.UI/bin/Debug
+/UnitTestReporter.UI/obj
+/UnitTestReporter.UI/.vs/UnitTestReporter
+=======
+>>>>>>> 61a1018 (Updated Git Folder Path)

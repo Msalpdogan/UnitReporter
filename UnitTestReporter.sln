@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29905.134
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTestReporter", "UnitTestReporter\UnitTestReporter.csproj", "{EB6B92FB-B39F-4FF0-99E2-A9D29284810B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTestReporter.UI", "UnitTestReporter.UI\UnitTestReporter.UI.csproj", "{EB6B92FB-B39F-4FF0-99E2-A9D29284810B}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTestReporter.Business", "UnitTestReporter.Business\UnitTestReporter.Business.csproj", "{74F5BDA6-E919-4C96-84E6-A175AF988229}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTestReporter.Core", "UnitTestReporter.Core\UnitTestReporter.Core.csproj", "{87DA3127-A4D6-4771-B309-AD82FA18FC02}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestReporter.Test", "UnitTestReporter.Test\UnitTestReporter.Test.csproj", "{F4E04EF8-D45A-467F-ABCD-0307D715C354}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTestReporter.Test", "UnitTestReporter.Test\UnitTestReporter.Test.csproj", "{F4E04EF8-D45A-467F-ABCD-0307D715C354}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

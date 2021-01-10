@@ -38,3 +38,5 @@
 /UnitTestReporter.UI/.vs/UnitTestReporter
 =======
 >>>>>>> 61a1018 (Updated Git Folder Path)
+/UnitReporter.VsPlugin/bin
+/UnitReporter.VsPlugin/obj

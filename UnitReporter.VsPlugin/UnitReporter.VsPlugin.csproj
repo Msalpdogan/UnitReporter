@@ -75,6 +75,7 @@
     <Compile Include="Core\Configuration\ParserSettings.cs" />
     <Compile Include="Core\Extensions\StatusExtension.cs" />
     <Compile Include="Core\Extensions\XElementExtensions.cs" />
+    <Compile Include="Core\Models\PluginStatics\PageConstants.cs" />
     <Compile Include="Core\Models\Report.cs" />
     <Compile Include="Core\Models\RunInfo.cs" />
     <Compile Include="Core\Models\Status.cs" />

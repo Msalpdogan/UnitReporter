@@ -1,8 +1,10 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Diagnostics.CodeAnalysis;
+using System.IO;
 using System.Windows;
-using System.Windows.Controls;
+using System.Windows.Forms;
+using UnitReporter.VsPlugin.Core.Models.PluginStatics;
 using UnitTestReporter.Business.Parser;
 using UnitTestReporter.Business.Reporter;
 using UnitTestReporter.Core.Models;
@@ -13,7 +15,7 @@ namespace UnitReporter.VsPlugin
     /// <summary>
     /// Interaction logic for ToolTestWindowControl.
     /// </summary>
-    public partial class ToolTestWindowControl : UserControl
+    public partial class ToolTestWindowControl : System.Windows.Controls.UserControl
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ToolTestWindowControl"/> class.
@@ -21,6 +23,8 @@ namespace UnitReporter.VsPlugin
         public ToolTestWindowControl()
         {
             this.InitializeComponent();
+           
+            progressBar.Value = 0;
         }
 
         /// <summary>
@@ -30,45 +34,106 @@ namespace UnitReporter.VsPlugin
         /// <param name="e">The event args.</param>
         [SuppressMessage("Microsoft.Globalization", "CA1300:SpecifyMessageBoxOptions", Justification = "Sample code")]
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "Default event handler naming pattern")]
-        private void button1_Click(object sender, RoutedEventArgs e)
+        private void Report_Click(object sender, RoutedEventArgs e)
         {
-            Report report= new Report();
-            string inputFile = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\UnitTestReporter\\Test.xml";
-            MessageBox.Show(inputFile);
+            Report report = new Report();
+            string inputFile = PageConstants.inputFilePath;
+            System.Windows.MessageBox.Show(inputFile);
             var reportType = new ParserUtil().GetTestRunnerType(inputFile);
-            MessageBox.Show(reportType.ToString());
+            progressBar.Value += 10;
+
+            System.Windows.MessageBox.Show(reportType.ToString());
             if (reportType == UnitTestReporter.Core.Models.TestRunner.NUnit)
             {
-               report = new NUnit().Parse(inputFile);
-               MessageBox.Show(JsonConvert.SerializeObject(report));
+                report = new NUnit().Parse(inputFile);
+                progressBar.Value += 20;
+
+                System.Windows.MessageBox.Show(JsonConvert.SerializeObject(report));
                 try
                 {
-                    new ReporterDocx().CreateReport(report);
+                    new ReporterDocx().CreateReport(report,PageConstants.outputFolderPath);
+                    progressBar.Value += 20;
 
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.ToString() + "///Button 1 ex");
-                    MessageBox.Show(ex.Message + "///Button 1 ex");
-                    MessageBox.Show(JsonConvert.SerializeObject(ex) + "///Button 1 ex");
-                    MessageBox.Show(AppDomain.CurrentDomain.BaseDirectory );
+                    System.Windows.MessageBox.Show("EX MUH \r"+ex.ToString());
 
-                    
-
-
-                    throw;
                 }
-               MessageBox.Show("Report OK");
+                System.Windows.MessageBox.Show("Report OK");
 
             }
             else
             {
-                MessageBox.Show("Else");
+                System.Windows.MessageBox.Show("Else");
             }
-
-            MessageBox.Show(
-                string.Format(System.Globalization.CultureInfo.CurrentUICulture, "Invoked '{0}'", this.ToString()),
-                "ToolTestWindow");
         }
+
+        private void OutputSelect_Click(object sender, RoutedEventArgs e)
+        {
+            FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
+            folderBrowserDialog.Description ="Select the directory that you want to use as the default.";
+            folderBrowserDialog.ShowNewFolderButton = true;
+            folderBrowserDialog.RootFolder = Environment.SpecialFolder.Personal;
+            // Show the FolderBrowserDialog.
+            DialogResult result = folderBrowserDialog.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                OutputLbl.Content = folderBrowserDialog.SelectedPath;
+                PageConstants.outputFolderPath = folderBrowserDialog.SelectedPath;
+                progressBar.Value += 18;
+                ready4Report();
+            }
+        }
+
+        private void SelectInputFileButton_Click(object sender, RoutedEventArgs e)
+        {
+             OpenFileDialog openFileDialog = new OpenFileDialog();
+             openFileDialog.Multiselect = false;
+             openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+             if (openFileDialog.ShowDialog() == DialogResult.OK)
+             {
+                InputLbl.Content = openFileDialog.FileName;
+                PageConstants.inputFilePath = openFileDialog.FileName;
+                progressBar.Value += 18;
+                ready4Report();
+            }
+        }
+        private void ready4Report()
+        {
+            if (string.IsNullOrEmpty(PageConstants.inputFilePath) || string.IsNullOrEmpty(PageConstants.outputFolderPath) || string.IsNullOrEmpty(PageConstants.templateFilePath))
+                button1.IsEnabled = false;
+            else
+            {
+                button1.IsEnabled = true;
+                button1.Content = "Create Report";
+            }
+        }
+
+        private void Template_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Multiselect = false;
+            openFileDialog.Filter = "Word Documents|*.docx";
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                TemplateLbl.Content = openFileDialog.FileName;
+                PageConstants.templateFilePath = openFileDialog.FileName;
+                progressBar.Value += 14;
+                ready4Report();
+            }
+        }
+
+
+        //private void Button_Click(object sender, RoutedEventArgs e)
+        //{
+        //    OpenFileDialog openFileDialog = new OpenFileDialog();
+        //    openFileDialog.Multiselect = false;
+        //    openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+        //    if (openFileDialog.ShowDialog() == DialogResult.OK)
+        //    {
+        //         lbFiles.Items.Add(Path.GetFileName(openFileDialog.FileName));
+        //    }
+        //}
     }
 }

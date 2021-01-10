@@ -7,12 +7,104 @@
              Background="{DynamicResource {x:Static vsshell:VsBrushes.WindowKey}}"
              Foreground="{DynamicResource {x:Static vsshell:VsBrushes.WindowTextKey}}"
              mc:Ignorable="d"
-             d:DesignHeight="300" d:DesignWidth="300"
-             Name="MyToolWindow">
-    <Grid>
-        <StackPanel Orientation="Vertical">
-            <TextBlock Margin="10" HorizontalAlignment="Center">ToolTestWindow</TextBlock>
-            <Button Content="Click me!" Click="button1_Click" Width="120" Height="80" Name="button1"/>
-        </StackPanel>
-    </Grid>
+             Name="MyToolWindow" Height="263.717" Width="657.348">
+
+
+    <StackPanel Orientation="Vertical" Margin="0,5,4,-17" RenderTransformOrigin="0.5,0.5" Height="276" VerticalAlignment="Top">
+        <StackPanel.RenderTransform>
+            <TransformGroup>
+                <ScaleTransform/>
+                <SkewTransform/>
+                <RotateTransform Angle="-0.218"/>
+                <TranslateTransform/>
+            </TransformGroup>
+        </StackPanel.RenderTransform>
+        <DockPanel x:Name="NavigationDock" Height="278" LastChildFill="False" Background="#FFCFCFCF" Margin="0,0,-14,0" RenderTransformOrigin="0.499,0.524" HorizontalAlignment="Left" Width="667">
+            <WrapPanel Width="666" Margin="0,10,0,0" Height="268" VerticalAlignment="Top" >
+                <Button x:Name="SelectInputFileButton" Content="Select Input File" Width="171" Height="42" HorizontalAlignment="Left" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5" Click="SelectInputFileButton_Click" Background="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}">
+                    <Button.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform AngleX="-2.585"/>
+                            <RotateTransform/>
+                            <TranslateTransform X="-0.768"/>
+                        </TransformGroup>
+                    </Button.RenderTransform>
+                </Button>
+                <Label Name="InputLbl" Content="Please Select Input File" Width="486" Background="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}"/>
+                <Button Name="OutputBtn" Content="Select Output Folder" Width="171" Height="42" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Click="OutputSelect_Click" Background="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}">
+                    <Button.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform AngleX="-2.585"/>
+                            <RotateTransform/>
+                            <TranslateTransform X="-0.768"/>
+                        </TransformGroup>
+                    </Button.RenderTransform>
+                </Button>
+                <Label Name="OutputLbl" Content="Please Select Output Folder" Width="486" Background="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}"/>
+                <Button Name="TemplateBtn" Content="Select Template File" Width="171" Height="42" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Click="Template_Click" Background="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}">
+                    <Button.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform AngleX="-2.585"/>
+                            <RotateTransform/>
+                            <TranslateTransform X="-0.768"/>
+                        </TransformGroup>
+                    </Button.RenderTransform>
+                </Button>
+                <Label Name="TemplateLbl" Content="Please Select Template File" Width="486" Background="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}"/>
+                <ProgressBar x:Name = "progressBar"  Value = "0"  Margin = "10" Maximum = "100"  
+                  Height = "37" IsIndeterminate = "False" Width="621" />
+                <Button Content="Create Report (Please Select Paths)" Click="Report_Click" Height="30"  x:Name="button1"  RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" Width="239" Margin="0" VerticalAlignment="Top" Background="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" IsEnabled="False"/>
+
+                <!--<Grid Height="871" VerticalAlignment="Top" Width="656"/>
+                <ListView  ScrollViewer.HorizontalScrollBarVisibility="Visible" HorizontalAlignment = "Left" Margin = "10,10,0,0" VerticalAlignment = "Top" Name = "MenList" Height="775" Width="639">
+
+                    <ListView.View>
+                        <GridView AllowsColumnReorder="true" ColumnHeaderToolTip="Authors">
+                            -->
+                <!-- Add a ContextMenu to GridView Header -->
+                <!--
+                            <GridView.ColumnHeaderContextMenu>
+                                <ContextMenu >
+                                    <MenuItem Header="Ascending" Click="MenuItem_Click" />
+                                    <MenuItem Header="Descending" />
+                                </ContextMenu>
+                            </GridView.ColumnHeaderContextMenu>
+                            -->
+                <!-- Add GridVeiw Columns -->
+                <!--
+                            <GridViewColumn  Width="25">
+                                <GridViewColumn.Header>
+                                    <CheckBox Name="chkWspSelectAll" HorizontalAlignment="Center" VerticalAlignment="Center" Checked="chkWspSelectAll_Checked"  Unchecked="chkWspSelectAll_Unchecked"  IsThreeState="False"/>
+                                </GridViewColumn.Header>
+
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <CheckBox Name="chkWspSelect" IsChecked="{Binding Path=IsSelected}" HorizontalContentAlignment="Center"  HorizontalAlignment="Center" VerticalAlignment="Center" Checked="chkWspSelect_Checked"  Unchecked="chkWspSelect_Unchecked"  IsThreeState="False"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header="Name" Width="120" DisplayMemberBinding="{Binding Path=Name}" />
+                            <GridViewColumn Header="Age" Width="50" DisplayMemberBinding="{Binding Path=Age}" />
+                            <GridViewColumn Header="Mail" Width="150">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Mail}" TextDecorations="Underline" Foreground="Blue" Cursor="Hand" />
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+
+                </ListView>
+                <Grid />-->
+            </WrapPanel>
+
+
+        </DockPanel>
+
+    </StackPanel>
+
 </UserControl>

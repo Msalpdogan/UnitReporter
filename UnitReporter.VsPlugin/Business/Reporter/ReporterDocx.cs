@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
+using UnitReporter.VsPlugin.Core.Models.PluginStatics;
 using UnitTestReporter.Core.Configuration;
 using UnitTestReporter.Core.Models;
 
@@ -13,13 +14,13 @@ namespace UnitTestReporter.Business.Reporter
         public ReporterDocx()
         {
         }
-        public void CreateReport(Report report)
+        public void CreateReport(Report report,string outputFolder)
         {
             string exMessage = "";
             try
             {
-                string templatePath = new CommonSettings().DocxTemplate;
-                string resultPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\UnitTestReporter\\" + report.FileName + DateTime.Now.ToLongTimeString().Replace(':', '-') + ".docx";
+                string templatePath = PageConstants.templateFilePath;
+                string resultPath = outputFolder + "\\" + report.FileName + DateTime.Now.ToLongTimeString().Replace(':', '-') + ".docx";
                 exMessage = resultPath;
                 string isSuccess = "False";
                 string tester = System.Environment.MachineName;

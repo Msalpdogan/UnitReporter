@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
     <Metadata>
-        <Identity Id="UnitReporter.VsPlugin.c2042f69-9085-406a-af18-a71bcd1f1406" Version="1.1.9.9" Language="en-US" Publisher="Muhammet Alpdoğan" />
+        <Identity Id="UnitReporter.VsPlugin.c2042f69-9085-406a-af18-a71bcd1f1406" Version="1.2.0.0" Language="en-US" Publisher="M Alpdogan" />
         <DisplayName>UnitReporter.VsPlugin</DisplayName>
-        <Description xml:space="preserve">Version 1.1.9.8</Description>
+        <Description xml:space="preserve">UnitTest reporterUnitPar</Description>
     </Metadata>
     <Installation>
         <InstallationTarget Id="Microsoft.VisualStudio.Community" Version="[16.0, 17.0)" />

@@ -38,17 +38,14 @@ namespace UnitReporter.VsPlugin
         {
             Report report = new Report();
             string inputFile = PageConstants.inputFilePath;
-            System.Windows.MessageBox.Show(inputFile);
             var reportType = new ParserUtil().GetTestRunnerType(inputFile);
             progressBar.Value += 10;
 
-            System.Windows.MessageBox.Show(reportType.ToString());
             if (reportType == UnitTestReporter.Core.Models.TestRunner.NUnit)
             {
                 report = new NUnit().Parse(inputFile);
                 progressBar.Value += 20;
 
-                System.Windows.MessageBox.Show(JsonConvert.SerializeObject(report));
                 try
                 {
                     new ReporterDocx().CreateReport(report,PageConstants.outputFolderPath);

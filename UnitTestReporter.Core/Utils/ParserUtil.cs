@@ -12,7 +12,7 @@ using UnitTestReporter.Core.Models;
 
 namespace UnitTestReporter.Core.Utils
 {
-    public class ParserUtil
+    public class ParserUtil : IParseUtil
     {
         private readonly ILogger _logger;
 
@@ -77,16 +77,15 @@ namespace UnitTestReporter.Core.Utils
 
                         if (testFramework.Contains("xunit"))
                         {
-                            return TestRunner.Unknown;
 
-                            //if (testFramework.Contains(" 2."))
-                            //{
-                            //    return TestRunner.XUnitV2;
-                            //}
-                            //else if (testFramework.Contains(" 1."))
-                            //{
-                            //    return TestRunner.XUnitV1;
-                            //}
+                            if (testFramework.Contains(" 2."))
+                            {
+                                return TestRunner.XUnitV2;
+                            }
+                            else if (testFramework.Contains(" 1."))
+                            {
+                                return TestRunner.XUnitV1;
+                            }
                         }
                     }
 
@@ -119,9 +118,9 @@ namespace UnitTestReporter.Core.Utils
         {
             try
             {
-                var assembly = Assembly.GetExecutingAssembly();
-                using (var stream = assembly.GetManifestResourceStream(_parserSettings.JUnitSchemaPath))
-                using (var reader = new StreamReader(stream))
+                //var assembly = Assembly.GetExecutingAssembly();
+                //using (var stream = assembly.GetManifestResourceStream(_parserSettings.JUnitSchemaPath))
+                using (var reader = new StreamReader(_parserSettings.JUnitSchemaPath))
                 {
                     var schema = new XmlSchemaSet();
 

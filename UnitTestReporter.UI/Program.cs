@@ -12,6 +12,7 @@ using Microsoft.Extensions.Configuration;
 using System.IO;
 using UnitTestReporter.Business.Parser;
 using UnitTestReporter.Business.Reporter;
+using UnitTestReporter.Core.Utils;
 
 namespace UnitTestReporter
 {
@@ -51,6 +52,7 @@ namespace UnitTestReporter
                        services.AddSingleton<IParser<NUnit>, NUnit>();
                        services.AddSingleton<IParser<JUnit>, JUnit>();
                        services.AddSingleton<IReporter<ReporterDocx>, ReporterDocx>();
+                       services.AddSingleton<IParseUtil, ParserUtil>();
 
 
 

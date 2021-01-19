@@ -16,6 +16,9 @@
     <None Update="Files\appsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Files\JUnit.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Files\template.docx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

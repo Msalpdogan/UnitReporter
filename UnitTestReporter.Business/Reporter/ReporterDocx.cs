@@ -15,10 +15,9 @@ namespace UnitTestReporter.Business.Reporter
         {
             commonSettings = options.Value;
         }
-        public void CreateReport(Report report)
+        public void CreateReport(Report report , string templatePath, string outputFolder)
         {
-            string templatePath = commonSettings.DocxTemplate;
-            string resultPath = report.FileName + DateTime.Now.ToShortDateString().Replace('.','-') + ".docx";
+            string resultPath = outputFolder +"\\Report"+ DateTime.Now.ToLongDateString().Replace('.','-') + ".docx";
             string isSuccess = "False";
             string tester = System.Environment.MachineName;
 
